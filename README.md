@@ -3,7 +3,6 @@
 - **Azure Kubernetes Service** is a managed container orchestration service based on the open source Kubernetes system. 
 - AKS can handle critical functionality such as deploying, scaling and managing Docker containers and container-based applications.
 - AKS became generally available in June 2018
-- There can be multiple resource group in a single subscription
 
 ![Azure Kubernetes Service](https://miro.medium.com/max/1890/1*l6oSrwfJhPXdfA92KYtfzA.png)
 
