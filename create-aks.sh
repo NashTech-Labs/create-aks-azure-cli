@@ -3,8 +3,6 @@
 set -o errexit
 set -o xtrace  # used for debugging
 
-# az provider list --query "[?contains(namespace,'Microsoft.ContainerInstance')]" -o table
-
 ##################################################
 
 # Variables for Azure Resource Group
@@ -19,8 +17,6 @@ echo "Creating an Azure Resource Group"
 create_rg_status=$(az group create \
     --name $rg_name \
     --location $rg_location)
-
-# create_rg_status=$(echo "creating rg")
 
 # check status code for resource group creation
 create_rg_status_code=$?
@@ -41,12 +37,10 @@ echo "Creating an Azure VNet"
 
 if [ -z "$vnet_address_prefix" ]
 then
-    # create_vnet_status=$(echo "creating vnet without address prefix")
     create_vnet_status=$(az network vnet create \
         --resource-group $rg_name \
         --name $vnet_name)
 else
-    # create_vnet_status=$(echo "creating vnet with address prefix")
     create_vnet_status=$(az network vnet create \
         --resource-group $rg_name \
         --name $vnet_name \
@@ -57,13 +51,6 @@ fi
 create_vnet_status_code=$?
 
 [ $create_vnet_status_code -eq 0 ] && echo "\nVNet Created" || echo "\nError creating VNet \n $create_vnet_status"
-
-# az network vnet create \
-#     --resource-group $rg_name \
-#     --name $vnet_name \
-#     --address-prefixes 10.0.0.0/8 \
-#     # --subnet-name myAKSSubnet \
-#     # --subnet-prefix 10.240.0.0/16
 
 ##################################################
 
@@ -77,7 +64,6 @@ read subnet_address_prefix
 # Create Azure VNet Subnet
 echo "Creating an Azure VNet Subnet"
 
-# create_subnet_status=$(echo "subnet creating")
 create_subnet_status=$(az network vnet subnet create \
     --resource-group $rg_name \
     --vnet-name $vnet_name \
